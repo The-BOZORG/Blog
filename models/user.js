@@ -1,6 +1,6 @@
-import { timeStamp } from 'console';
 import mongoose from 'mongoose';
 import validator from 'validator';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema(
   {
@@ -44,5 +44,13 @@ const userSchema = new mongoose.Schema(
   },
   { timeseries: true },
 );
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(12);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 export default mongoose.model('User', userSchema);

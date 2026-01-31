@@ -16,12 +16,7 @@ const postSchema = new mongoose.Schema(
       maxlength: [100, 'Description cannot be more than 100 characters'],
     },
 
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-    },
+    slug: String,
 
     isPublished: {
       type: Boolean,
@@ -36,5 +31,11 @@ const postSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+
+//make slugify URL
+postSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
 
 export default mongoose.model('Post', postSchema);
