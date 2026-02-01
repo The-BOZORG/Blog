@@ -30,11 +30,15 @@ const userSchema = new mongoose.Schema(
       required: [true, 'please add a password'],
       minlength: [6, 'password must have more than 6 characters'],
       select: false,
-      validate: {
-        validator: validator.isStrongPassword,
-        message: 'please add a strong password',
-      },
     },
+
+    tokens: [
+      {
+        refreshToken: String,
+        userAgent: String,
+        createdAt: Date,
+      },
+    ],
 
     role: {
       type: String,
@@ -42,7 +46,7 @@ const userSchema = new mongoose.Schema(
       default: 'user',
     },
   },
-  { timeseries: true },
+  { timestamps: true },
 );
 
 userSchema.pre('save', async function (next) {
@@ -53,7 +57,7 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-userSchema.method.mathPassword = async function (enterPassword) {
+userSchema.methods.matchPassword = async function (enterPassword) {
   return await bcrypt.compare(enterPassword, this.password);
 };
 

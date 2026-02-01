@@ -11,7 +11,7 @@ import morgan from 'morgan';
 
 //use packages
 app.use(express.json({ limit: '10kb' }));
-app.use(cookieParser(process.env.JWT_COOKIE_SECRET));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(helmet());
 
