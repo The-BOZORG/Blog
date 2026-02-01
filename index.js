@@ -1,4 +1,5 @@
 import connectDB from './configs/dbConfig.js';
+import limiter from './utils/limiter.js';
 import express from 'express';
 const app = express();
 
@@ -25,8 +26,8 @@ import postRoute from './routes/post.js';
 import reviewRoute from './routes/review.js';
 
 //user routes
-app.use('/user', userRoute);
-app.use('/auth', authRoute);
+app.use('/user', limiter, userRoute);
+app.use('/auth', limiter, authRoute);
 app.use('/post', postRoute);
 app.use('/review', reviewRoute);
 
