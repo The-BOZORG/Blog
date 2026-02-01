@@ -10,21 +10,29 @@ import morgan from 'morgan';
 
 //use packages
 app.use(express.json({ limit: '10kb' }));
-app.use(cookieParser());
+app.use(cookieParser(process.env.JWT_COOKIE_SECRET));
 app.use(morgan('dev'));
 app.use(helmet());
 
 //middlewares
+import errorHandler from './middlewares/errHandler.js';
+import notFound from './middlewares/notFound.js';
 
 //routes
 import userRoute from './routes/user.js';
 import authRoute from './routes/auth.js';
 import postRoute from './routes/post.js';
+import reviewRoute from './routes/review.js';
 
 //user routes
 app.use('/user', userRoute);
 app.use('/auth', authRoute);
 app.use('/post', postRoute);
+app.use('/review', reviewRoute);
+
+//use middlewares
+app.use(errorHandler);
+app.use(notFound);
 
 //server
 const PORT = process.env.PORT || 5000;

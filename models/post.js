@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import slugify from 'slugify';
 
 const postSchema = new mongoose.Schema(
@@ -23,7 +23,7 @@ const postSchema = new mongoose.Schema(
       default: true,
     },
 
-    author: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,

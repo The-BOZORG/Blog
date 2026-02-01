@@ -11,11 +11,8 @@ import {
 
 router.route('/').get(showAllUsers);
 
-router
-  .route('/:id')
-  .get(showSingleUser)
-  .patch(updateUser)
-  .put(updatePasswordUser)
-  .delete(deleteUser);
+router.route('/:id').get(showSingleUser).patch(updateUser).delete(deleteUser);
+
+router.put('/:id/update-password', updatePasswordUser);
 
 export default router;
