@@ -1,7 +1,19 @@
 import connectDB from './configs/dbConfig.js';
 import limiter from './utils/limiter.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import express from 'express';
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'api-docs.html'));
+});
 
 //packages
 import colors from 'colors';
@@ -9,6 +21,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 //use packages
+app.use(express.static('public'));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -37,7 +50,7 @@ app.use(notFound);
 //server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, '127.0.0.1', () => {
+const server = app.listen(PORT, '127.0.0.1', () => {
   console.log(`Server running on http://127.0.0.1:${PORT}`);
 });
 
