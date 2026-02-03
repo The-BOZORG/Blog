@@ -13,7 +13,7 @@ import {
   authorizePermissions,
 } from '../middlewares/authitication.js';
 
-router.post('/', authenticateUser, createReview);
+router.post('/posts/:postId', authenticateUser, createReview);
 
 router.get('/posts/:postId', authenticateUser, getPostReview);
 

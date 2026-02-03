@@ -1,4 +1,4 @@
-import connectDB from './configs/dbConfig.js';
+import { connectDB, disconnectDB } from './configs/dbConfig.js';
 import limiter from './utils/limiter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';

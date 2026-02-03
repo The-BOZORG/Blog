@@ -29,4 +29,4 @@ const reviewSchema = new mongoose.Schema(
 
 reviewSchema.index({ post: 1 });
 
-export default mongoose.model('Comment', reviewSchema);
+export default mongoose.model('Review', reviewSchema);

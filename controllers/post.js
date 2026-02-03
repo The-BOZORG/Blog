@@ -13,7 +13,7 @@ const allPosts = catchAsync(async (req, res) => {
 //GET single post
 //@access route
 const singlePost = catchAsync(async (req, res) => {
-  const post = await Post.findById(req.params.id).populate('user', 'name');
+  const post = await Post.findById(req.params.id).populate('user', 'username');
   if (!post) {
     throw new ErrorResponse('post not found', 404);
   }

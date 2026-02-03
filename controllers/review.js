@@ -22,14 +22,14 @@ const createReview = catchAsync(async (req, res) => {
 //GET post review
 //@protect route
 const getPostReview = catchAsync(async (req, res) => {
-  const review = await Review.findById({
+  const review = await Review.find({
     post: req.params.postId,
     isApproved: true,
   }).populate({
     path: 'user',
     select: 'username',
   });
-  if (!review) {
+  if (!review || review.length === 0) {
     throw new ErrorResponse('not found this review', 404);
   }
   res.status(200).json({ success: true, data: review });
@@ -38,11 +38,11 @@ const getPostReview = catchAsync(async (req, res) => {
 //GET user review
 //@protect route
 const getUserReview = catchAsync(async (req, res) => {
-  const review = await Review.findById({ user: req.params.userId }).populate({
+  const review = await Review.find({ user: req.params.userId }).populate({
     path: 'post',
     select: 'title content',
   });
-  if (!review) {
+  if (!review || review.length === 0) {
     throw new ErrorResponse('not found this review', 404);
   }
   res.status(200).json({ success: true, data: review });
@@ -51,7 +51,7 @@ const getUserReview = catchAsync(async (req, res) => {
 //DELETE review
 //@protect route(only admin)
 const deleteReview = catchAsync(async (req, res) => {
-  const review = await Review.findById(req.params.id);
+  const review = await Review.findByIdAndDelete(req.params.id);
   if (!review) {
     throw new ErrorResponse('not found this review', 404);
   }
