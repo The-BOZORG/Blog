@@ -20,13 +20,6 @@ A simple Blog REST API built with Node.js, Express, and MongoDB. It supports aut
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+
-- MongoDB
-
-### Installation
-
 1. Install dependencies
 
 npm install
@@ -39,7 +32,7 @@ JWT_ACCESS_TOKEN=your_access_secret
 JWT_REFRESH_TOKEN=your_refresh_secret
 JWT_ACCESS_EXPIRES=15m
 JWT_REFRESH_EXPIRES=7d
-PORT=5000
+PORT=3000
 ```
 
 3. Start the server
