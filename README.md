@@ -33,12 +33,14 @@ npm install
 
 2. Create an .env file in the project root and add the following:
 
+```
 MONGO_URI=your_mongodb_connection_string
 JWT_ACCESS_TOKEN=your_access_secret
 JWT_REFRESH_TOKEN=your_refresh_secret
 JWT_ACCESS_EXPIRES=15m
 JWT_REFRESH_EXPIRES=7d
 PORT=5000
+```
 
 3. Start the server
 
@@ -48,42 +50,12 @@ The API will be available at http://127.0.0.1:5000
 
 ## API Overview
 
-Base URL: http://127.0.0.1:5000
-
-### Auth
-
-- POST /auth/register
-- POST /auth/login
-- POST /auth/logout
-- POST /auth/token
-
-### Users
-
-- GET /user/showAllUsers (admin)
-- GET /user/me
-- GET /user/:id
-- PATCH /user/:id
-- PUT /user/update-password/:id
-
-### Posts
-
-- GET /post
-- GET /post/:id
-- POST /post (auth)
-- PATCH /post/:id (auth)
-- DELETE /post/:id (admin)
-
-### Reviews
-
-- POST /review/posts/:postId (auth)
-- GET /review/posts/:postId (auth)
-- GET /review/users/:userId (auth)
-- DELETE /review/:id (admin)
+Base URL: http://127.0.0.1:{PORT}
 
 ## Documentation
 
 Open the API documentation at:
-http://127.0.0.1:5000/
+http://127.0.0.1:{PORT}
 
 ## Notes
 
