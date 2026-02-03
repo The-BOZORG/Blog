@@ -4,7 +4,6 @@ import express from 'express';
 const app = express();
 
 //packages
-import cookieParser from 'cookie-parser';
 import colors from 'colors';
 import helmet from 'helmet';
 import morgan from 'morgan';

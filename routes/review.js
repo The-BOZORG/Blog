@@ -3,21 +3,27 @@ const router = Router();
 
 import {
   createReview,
-  approveReview,
   getPostReview,
   getUserReview,
-  updateReview,
   deleteReview,
 } from '../controllers/review.js';
 
-router.post('/', createReview);
+import {
+  authenticateUser,
+  authorizePermissions,
+} from '../middlewares/authitication.js';
 
-router.get('/post/:postId', getPostReview);
+router.post('/', authenticateUser, createReview);
 
-router.get('/user/:userId', getUserReview);
+router.get('/posts/:postId', authenticateUser, getPostReview);
 
-router.patch('/:id/approve', approveReview);
+router.get('/users/:userId', authenticateUser, getUserReview);
 
-router.route('/:id').patch(updateReview).delete(deleteReview);
+router.delete(
+  '/:id',
+  authenticateUser,
+  authorizePermissions('admin'),
+  deleteReview,
+);
 
 export default router;

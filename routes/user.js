@@ -3,16 +3,28 @@ const router = Router();
 
 import {
   showAllUsers,
+  showUser,
   showSingleUser,
   updateUser,
   updatePasswordUser,
-  deleteUser,
 } from '../controllers/user.js';
 
-router.route('/').get(showAllUsers);
+import {
+  authenticateUser,
+  authorizePermissions,
+} from '../middlewares/authitication.js';
 
-router.route('/:id').get(showSingleUser).patch(updateUser).delete(deleteUser);
+router.get(
+  '/showAllUsers',
+  authenticateUser,
+  authorizePermissions('admin'),
+  showAllUsers,
+);
 
-router.put('/:id/update-password', updatePasswordUser);
+router.get('/me', authenticateUser, showUser);
+
+router.get('/:id', authenticateUser, showSingleUser);
+router.patch('/:id', authenticateUser, updateUser);
+router.put('/update-password/:id', authenticateUser, updatePasswordUser);
 
 export default router;

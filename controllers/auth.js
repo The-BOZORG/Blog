@@ -75,22 +75,23 @@ const login = catchAsync(async (req, res) => {
 
 //LOGOUT
 const logout = catchAsync(async (req, res) => {
-  if (!req.user) {
-    throw new ErrorResponse('User not found', 401);
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    throw new ErrorResponse('Refresh token required', 400);
   }
 
-  await User.findByIdAndUpdate(req.user.userId, {
-    $pull: {
-      tokens: { userAgent: req.headers['user-agent'] },
-    },
-  });
+  await User.updateOne(
+    { 'tokens.refreshToken': refreshToken },
+    { $pull: { tokens: { userAgent: req.headers['user-agent'] } } },
+  );
 
   res.status(200).json({
-    message: 'Logged out successfully from this device',
+    message: 'logout success',
   });
 });
 
-//REFRESH TOKEN
+//REFRESH TOKEN GENERATE
 const token = catchAsync(async (req, res) => {
   const refreshToken = req.body.refreshToken;
   const decoded = verifyRefreshToken(refreshToken);

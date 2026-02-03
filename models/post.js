@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema(
     content: {
       type: String,
       required: [true, 'Please add a content'],
-      maxlength: [100, 'Description cannot be more than 100 characters'],
+      maxlength: [200, 'Description cannot be more than 100 characters'],
     },
 
     slug: String,
@@ -33,9 +33,8 @@ const postSchema = new mongoose.Schema(
 );
 
 //make slugify URL
-postSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
-  next();
+postSchema.pre('save', async function () {
+  this.slug = slugify(this.title, { lower: true });
 });
 
 export default mongoose.model('Post', postSchema);

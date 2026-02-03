@@ -1,7 +1,7 @@
 import ErrorResponse from '../errors/customError.js';
 import { verifyAccessToken } from '../utils/jwt.js';
 
-const authenticateUser = async (req, res, next) => {
+const authenticateUser = (req, res, next) => {
   let token;
 
   if (
@@ -12,18 +12,25 @@ const authenticateUser = async (req, res, next) => {
   }
 
   if (!token) {
-    throw new ErrorResponse('not auth to access this route', 401);
+    return next(new ErrorResponse('not auth to access this route', 401));
   }
 
   try {
-    const { username, userId, role, email } = await verifyAccessToken({
-      token,
-    });
+    const { username, userId, role, email } = verifyAccessToken(token);
     req.user = { username, userId, role, email };
     next();
   } catch (err) {
-    throw new next(new ErrorResponse('token is not valid', 401));
+    return next(new ErrorResponse('token is not valid', 401));
   }
 };
 
-export default authenticateUser;
+const authorizePermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new ErrorResponse('unauthorized to access this route', 401);
+    }
+    next();
+  };
+};
+
+export { authenticateUser, authorizePermissions };

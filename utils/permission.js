@@ -6,4 +6,4 @@ const checkPermissions = (requestUser, resourceUserId) => {
   throw new ErrorResponse('not authorized to access this route', 403);
 };
 
-module.exports = checkPermissions;
+export default checkPermissions;

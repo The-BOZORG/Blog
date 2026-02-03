@@ -9,8 +9,17 @@ import {
   deletePost,
 } from '../controllers/post.js';
 
-router.route('/').post(createPost).get(allPosts);
+import {
+  authenticateUser,
+  authorizePermissions,
+} from '../middlewares/authitication.js';
 
-router.route('/:id').get(singlePost).patch(updatePost).delete(deletePost);
+router.route('/').post(authenticateUser, createPost).get(allPosts);
+
+router
+  .route('/:id')
+  .get(singlePost)
+  .patch(authenticateUser, updatePost)
+  .delete(authenticateUser, authorizePermissions('admin'), deletePost);
 
 export default router;

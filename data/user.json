@@ -1,0 +1,32 @@
+[
+  {
+    "username": "Admin Account",
+    "email": "admin@gmail.com",
+    "role": "admin",
+    "password": "123456"
+  },
+  {
+    "username": "Maggie Johnson",
+    "email": "maggie@gmail.com",
+    "role": "user",
+    "password": "123456"
+  },
+  {
+    "username": "Barry Dickens",
+    "email": "barry@gmail.com",
+    "role": "user",
+    "password": "123456"
+  },
+  {
+    "username": "Ryan Bolin",
+    "email": "ryan@gmail.com",
+    "role": "user",
+    "password": "123456"
+  },
+  {
+    "username": "Sara Kensing",
+    "email": "sara@gmail.com",
+    "role": "user",
+    "password": "123456"
+  }
+]

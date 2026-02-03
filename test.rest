@@ -13,9 +13,83 @@ POST http://127.0.0.1:3000/auth/login
 Content-Type: application/json
 
 {
-  "email":"ali@yahoo.com",
-  "password":"123456"
+  "email":"nagi@yahoo.com",
+  "password":"321654"
 }
 
 ###logout
 POST http://127.0.0.1:3000/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken":  "Bearer <REFRESH TOKEN>"
+}
+
+
+
+###showAllUsers(admin)
+GET http://127.0.0.1:3000/user/showAllUsers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
+
+###showUser
+GET http://127.0.0.1:3000/user/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
+
+
+###showSingleUser
+GET http://127.0.0.1:3000/user/697fa0d0b25c5de5aae301f1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
+
+###updateUser
+PATCH http://127.0.0.1:3000/user/697fa0d0b25c5de5aae301f1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6ImFsaUB5YWhvby5jb20iLCJ1c2VybmFtZSI6ImFsaSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3MDAyNjgyNSwiZXhwIjoxNzcwMDI3NDI1fQ.WzOurom7BOxJcsfQP5kcRlsoosHxytJEF7R3lUCmByM
+Content-Type: application/json
+
+{
+  "username":"nagi",
+  "email":"nagi@yahoo.com"
+}
+
+
+###updatepassword
+PUT http://127.0.0.1:3000/user/update-password/697fa0d0b25c5de5aae301f1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDI3NjU1LCJleHAiOjE3NzAwMjgyNTV9.bIOotNa7GPKzLAzTJnRZBVv4rtCpgKSW3jyGFqgOVsc
+Content-Type: application/json
+
+{
+  "currentPassword":"123456",
+  "newPassword":"321654"
+}
+
+###allPosts
+GET http://127.0.0.1:3000/post
+
+###singlePost
+GET http://127.0.0.1:3000/post/6980afdb11871312268849b0
+
+
+###createPost
+POST http://127.0.0.1:3000/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
+Content-Type: application/json
+
+{
+  "title":"test",
+  "content":"this is a test"
+}
+
+
+###updatepost
+PATCH http://127.0.0.1:3000/post/6980afdb11871312268849b0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
+Content-Type: application/json
+
+{
+  "title":"test3",
+  "content":"this is not test 3"
+}
+
+
+###delete(admin)
+DELETE http://127.0.0.1:3000/post/6980afdb11871312268849b0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdmYTBkMGIyNWM1ZGU1YWFlMzAxZjEiLCJlbWFpbCI6Im5hZ2lAeWFob28uY29tIiwidXNlcm5hbWUiOiJuYWdpIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcwMDQxMTU2LCJleHAiOjE3NzAwNDE3NTZ9.16IYLkHMoQYp6-HZfZp-mXGS8xay4-4JjTi09-c7ai0
